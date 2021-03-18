@@ -26,9 +26,10 @@ public class CoinAnimate : MonoBehaviour
         {
             m_animations.Play("CoinAnimation");
         }
+        Invoke("closeCoin", 3.0f);
     }
 
-    public void closeCoin()
+    void closeCoin()
     {
         coin.SetActive(false);
     }

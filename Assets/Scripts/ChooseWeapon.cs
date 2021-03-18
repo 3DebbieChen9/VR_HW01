@@ -21,14 +21,14 @@ public class ChooseWeapon : MonoBehaviour
 
     public void chooseWatergun()
     {
-        print("Choose Watergun");
+        //print("Choose Watergun");
         watergun.SetActive(true);
         sword.SetActive(false);
     }
 
     public void chooseSword()
     {
-        print("Choose Sword");
+        //print("Choose Sword");
         watergun.SetActive(false);
         sword.SetActive(true);
     }
