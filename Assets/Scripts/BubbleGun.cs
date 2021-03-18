@@ -11,10 +11,15 @@ public class BubbleGun : MonoBehaviour
 
     const string k_AnimTriggerDown = "TriggerDown";
     const string k_AnimTriggerUp = "TriggerUp";
-    const float k_HeldThreshold = 0.1f;
+    const float k_HeldThreshold = 0.05f;
 
     float m_TriggerHeldTime;
     bool m_TriggerDown;
+
+    public GameObject bulletPrefab;
+    public Transform bulletSpawn;
+    private bool canShoot = true;
+    private float currentTime;
 
     protected void Start()
     {
@@ -33,11 +38,24 @@ public class BubbleGun : MonoBehaviour
 
             if (m_TriggerHeldTime >= k_HeldThreshold)
             {
-                if (!m_BubbleParticleSystem.isPlaying)
+                //if (!m_BubbleParticleSystem.isPlaying)
+                //{
+                //    m_BubbleParticleSystem.Play();
+                //    print(m_BubbleParticleSystem.isPlaying);
+                //}
+                if (canShoot == true)
                 {
-                    m_BubbleParticleSystem.Play();    
+                    GameObject newBullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+                    currentTime = Time.time;
+                    canShoot = false;
+                    // Add force to the fire
+                    newBullet.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 500);
                 }
             }
+        }
+        if (Time.time - currentTime >= 2.0f)
+        {
+            canShoot = true;
         }
     }
 
@@ -47,14 +65,14 @@ public class BubbleGun : MonoBehaviour
         m_TriggerDown = false;
         m_TriggerHeldTime = 0f;
         m_BubbleParticleSystem.Stop();
-        print("Trigger Released");
+        //print("Trigger Released");
     }
 
     void TriggerPulled(ActivateEventArgs args)
     {
         //m_Animator.SetTrigger(k_AnimTriggerDown);
         m_TriggerDown = true;
-        print("Trigger Pulled");
+        //print("Trigger Pulled");
     }
 
     void DroppedGun(SelectExitEventArgs args)
