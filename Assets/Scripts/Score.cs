@@ -22,7 +22,7 @@ public class Score : MonoBehaviour
         {
             scoreText.text = ("Score: " + totalScore.ToString("0"));
             updateScore = false;
-            print(totalScore);
+            //print(totalScore);
         }
     }
 }

@@ -38,19 +38,18 @@ public class BubbleGun : MonoBehaviour
 
             if (m_TriggerHeldTime >= k_HeldThreshold)
             {
-                //if (!m_BubbleParticleSystem.isPlaying)
-                //{
-                //    m_BubbleParticleSystem.Play();
-                //    print(m_BubbleParticleSystem.isPlaying);
-                //}
-                if (canShoot == true)
+                if (!m_BubbleParticleSystem.isPlaying)
                 {
-                    GameObject newBullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-                    currentTime = Time.time;
-                    canShoot = false;
-                    // Add force to the fire
-                    newBullet.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 500);
+                    m_BubbleParticleSystem.Play();
                 }
+                //if (canShoot == true)
+                //{
+                //    GameObject newBullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+                //    currentTime = Time.time;
+                //    canShoot = false;
+                //    // Add force to the fire
+                //    newBullet.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 500);
+                //}
             }
         }
         if (Time.time - currentTime >= 2.0f)

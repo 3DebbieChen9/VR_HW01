@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
         string targetTag = other.gameObject.tag;
         if(!hit)
         {
-            print(targetTag);
+            //print(targetTag);
             switch (targetTag)
             {
                 case "target-50":
