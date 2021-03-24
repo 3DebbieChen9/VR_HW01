@@ -5,7 +5,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class BubbleGun : MonoBehaviour
 {
     XRGrabInteractable m_InteractableBase;
-    //Animator m_Animator;
     
     [SerializeField] ParticleSystem m_BubbleParticleSystem = null;
 
@@ -16,6 +15,10 @@ public class BubbleGun : MonoBehaviour
     float m_TriggerHeldTime;
     bool m_TriggerDown;
 
+    public GameObject weaponSwitchProvider;
+    private float button_N_value;
+    private bool weaponSwitch = true;
+
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     private bool canShoot = true;
@@ -24,7 +27,6 @@ public class BubbleGun : MonoBehaviour
     protected void Start()
     {
         m_InteractableBase = GetComponent<XRGrabInteractable>();
-        //m_Animator = GetComponent<Animator>();
         m_InteractableBase.selectExited.AddListener(DroppedGun);
         m_InteractableBase.activated.AddListener(TriggerPulled);
         m_InteractableBase.deactivated.AddListener(TriggerReleased);
@@ -32,24 +34,35 @@ public class BubbleGun : MonoBehaviour
 
     protected void Update()
     {
+        button_N_value = weaponSwitchProvider.GetComponent<ActionBasedWeaponSwitchProvider>().ReadInput();
+        if (button_N_value == 1)
+        {
+            weaponSwitch = !weaponSwitch;
+        }
         if (m_TriggerDown)
         {
             m_TriggerHeldTime += Time.deltaTime;
 
             if (m_TriggerHeldTime >= k_HeldThreshold)
             {
-                if (!m_BubbleParticleSystem.isPlaying)
+                if(weaponSwitch)
                 {
-                    m_BubbleParticleSystem.Play();
+                    if (!m_BubbleParticleSystem.isPlaying)
+                    {
+                        m_BubbleParticleSystem.Play();
+                    }
                 }
-                //if (canShoot == true)
-                //{
-                //    GameObject newBullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-                //    currentTime = Time.time;
-                //    canShoot = false;
-                //    // Add force to the fire
-                //    newBullet.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 500);
-                //}
+                else
+                {
+                    if (canShoot == true)
+                    {
+                        GameObject newBullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+                        currentTime = Time.time;
+                        canShoot = false;
+                        // Add force to the fire
+                        newBullet.GetComponent<Rigidbody>().AddForce(this.gameObject.transform.forward * 500);
+                    }
+                }
             }
         }
         if (Time.time - currentTime >= 2.0f)

@@ -2966,6 +2966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1961905344}
   - component: {fileID: 1961905345}
+  - component: {fileID: 1961905346}
   m_Layer: 0
   m_Name: Shooting
   m_TagString: Untagged
@@ -3005,6 +3006,30 @@ MonoBehaviour:
   totalScore: 0
   updateScore: 0
   scoreText: {fileID: 2077141038}
+--- !u!114 &1961905346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961905343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd222584160054872abae83e60f8e1ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LeftHandWeaponSwitchAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Hand Weapon Switch
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 7ca2ba8d-cb1c-4b8e-ab8c-b286369a6f8b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+    m_Reference: {fileID: 8940993639434849090, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
 --- !u!1 &2059885820
 GameObject:
   m_ObjectHideFlags: 0
@@ -3188,6 +3213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BubbleParticleSystem: {fileID: 689233256}
+  weaponSwitchProvider: {fileID: 1961905343}
   bulletPrefab: {fileID: 1604340010224622, guid: 17a44cf2e19b14f45b11237f3c2b3bdc,
     type: 3}
   bulletSpawn: {fileID: 525031743}
