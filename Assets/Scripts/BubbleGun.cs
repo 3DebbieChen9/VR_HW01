@@ -65,7 +65,7 @@ public class BubbleGun : MonoBehaviour
                 }
             }
         }
-        if (Time.time - currentTime >= 1.0f)
+        if (Time.time - currentTime >= 2.0f)
         {
             canShoot = true;
         }
